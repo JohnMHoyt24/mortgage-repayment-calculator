@@ -51,19 +51,21 @@ const Calculator: React.FC = () => {
                 setErrors({});
                 const principal = parseFloat(amount);
                 const annualInterestRate = parseFloat(rate) / 100;
-                //const monthlyInterestRate = annualInterestRate / 12;
-                const numberOfPayments = parseFloat(term) * 12;
-                let repayment: number;
-                let interest: number;
+                const monthlyInterestRate = annualInterestRate / 12;
+                const monthlyPayments = parseFloat(term) * 12;
+                let monthlyRepayment: number = (principal) * ((monthlyInterestRate * (Math.pow(1 + monthlyInterestRate, monthlyPayments))) / (Math.pow(1 + monthlyInterestRate, monthlyPayments) - 1));
+                let totalRepayment: number = monthlyRepayment * monthlyPayments;
+                let interest: number = principal * annualInterestRate;
 
                 if (mortgageType === 'repayment') {
-                    //Calculation for repayment mortgage
+                    //Calculating monthly payment for repayment mortgage
 
                 } else if(mortgageType === 'interest'){
                     //Calculation for interest only mortgage
                 }
 
                 //The result needs to be converted from a number to a string
+                const strMonthlyRepayment = monthlyRepayment.toString();
             }
 
             
