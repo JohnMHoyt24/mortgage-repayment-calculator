@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-
-interface Payment {
-    id: number,
-    amount: string,
-    term: string,
-    rate: string
-}
+import Results from "./Results";
 
 const Calculator: React.FC = () => {
     const [amount, setAmount] = useState("");
@@ -13,6 +7,7 @@ const Calculator: React.FC = () => {
     const [rate, setRate] = useState("");
     const [mortgageType, setMortgageType] = useState<'repayment' | 'interest' | ''>("");
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const [paymentResult, setPaymentResult] = useState("");
     const regex = /[^0-9.]/;
 
     const validate = () => {
@@ -41,38 +36,51 @@ const Calculator: React.FC = () => {
         })
     }
 
-        const handleCalculation = (e: React.FormEvent) => {
-            //The values the user enters are strings, they need to be converted to numbers for calculation
-            e.preventDefault();
-            const validationErrors = validate();
-            if (Object.keys(validationErrors).length > 0) {
-                setErrors(validationErrors);
-            } else {
-                setErrors({});
-                const principal = parseFloat(amount);
-                const annualInterestRate = parseFloat(rate) / 100;
-                const monthlyInterestRate = annualInterestRate / 12;
-                const monthlyPayments = parseFloat(term) * 12;
-                let monthlyRepayment: number = (principal) * ((monthlyInterestRate * (Math.pow(1 + monthlyInterestRate, monthlyPayments))) / (Math.pow(1 + monthlyInterestRate, monthlyPayments) - 1));
-                let totalRepayment: number = monthlyRepayment * monthlyPayments;
-                let interest: number = principal * annualInterestRate;
-
-                if (mortgageType === 'repayment') {
-                    //Calculating monthly payment for repayment mortgage
-
-                } else if(mortgageType === 'interest'){
-                    //Calculation for interest only mortgage
-                }
-
-                //The result needs to be converted from a number to a string
-                const strMonthlyRepayment = monthlyRepayment.toString();
-            }
-
-            
-
+    const calculatePayment = (e: React.FormEvent) => {
+        //The values the user enters are strings, they need to be converted to numbers for calculation
+        e.preventDefault();
+        const validationErrors = validate();
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return;
+        }
+        setErrors({});
+        const principal = parseFloat(amount);
+        const annualInterestRate = parseFloat(rate) / 100;
+        const monthlyInterestRate = annualInterestRate / 12;
+        const monthlyPayments = parseFloat(term) * 12;
+        if (monthlyPayments === 0) {
+            alert("Term must be greater than zero.");
+            return;
         }
 
-        return(
+        // Calculate monthly repayment safely, handling zero interest
+        let monthlyRepayment: number;
+        if (monthlyInterestRate === 0) {
+            monthlyRepayment = principal / monthlyPayments;
+        } else {
+            monthlyRepayment = principal * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -monthlyPayments));
+        }
+
+        if (mortgageType === 'repayment') {
+            const strMonthlyRepayment = monthlyRepayment.toFixed(2);
+            setPaymentResult(strMonthlyRepayment);
+        } else if (mortgageType === 'interest'){
+            // interest-only: monthly payment is principal * monthly rate
+            const interestOnlyMonthly = principal * monthlyInterestRate;
+            setPaymentResult(interestOnlyMonthly.toFixed(2));
+        } else {
+            // no mortgage type selected
+            setPaymentResult("");
+        }
+        //Reset the form after calculation
+        setAmount("");
+        setTerm("");
+        setRate("");
+        setMortgageType("");
+    }
+
+    return(
         <div>
             <h1>Mortgage Calculator</h1>
             <form>
@@ -143,11 +151,12 @@ const Calculator: React.FC = () => {
                     </label>
                 </div>
                 <div>
-                    <button type="button" onClick={handleCalculation}>
+                    <button onClick={calculatePayment}>
                         Calculate Repayments
                     </button>
                 </div>
             </form>
+            <Results payment={paymentResult} />
         </div>
     );
 }
