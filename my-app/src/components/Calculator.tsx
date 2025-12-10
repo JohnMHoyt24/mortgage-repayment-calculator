@@ -18,11 +18,11 @@ const Calculator: React.FC = () => {
         if(!rate) newErrors.rate = "Please provide the interest rate of the loan!";
 
         if(regex.test(amount)){
-            newErrors.amount = "The amount must be a number!";
+            newErrors.amount = "The amount must be a valid number!";
         } else if(regex.test(term)){
-            newErrors.term = "The term must be a number!";
+            newErrors.term = "The term must be a valid number!";
         } else if (regex.test(rate)) {
-            newErrors.rate = "The rate must be a number!";
+            newErrors.rate = "The rate must be a valid number!";
         }
 
         return newErrors;
@@ -81,9 +81,9 @@ const Calculator: React.FC = () => {
     }
 
     return(
-        <div>
-            <h1>Mortgage Calculator</h1>
+        <div className="flex justify-evenly items-center h-auto border p-4 m-50 w-200 rounded shadow-md">
             <form>
+                <h1>Mortgage Calculator</h1>
                 <h2>Mortgage Amount</h2>
                 <div>
                     <input
@@ -156,7 +156,9 @@ const Calculator: React.FC = () => {
                     </button>
                 </div>
             </form>
-            <Results payment={paymentResult} />
+            <div className="p-4 border rounded shadow-md">
+                <Results payment={paymentResult} />
+            </div>
         </div>
     );
 }
