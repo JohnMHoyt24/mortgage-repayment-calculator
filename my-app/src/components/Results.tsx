@@ -3,17 +3,17 @@ import emptyImage from '../assets/illustration-empty.svg';
 
 const Results: React.FC<{ payment: string }> = ({ payment }) => {
     return (
-        <section>
+        <div className="border border-width- border-transparent bg-blue-900 rounded-es-4xl text-center">
             {payment && payment !== null  ? (
                 <h2>Monthly Payment: ${payment}</h2>
             ) : (
-                <div>
+                <div className="flex justify-center items-center flex-col">
                     <img src={emptyImage} alt="Illustration of a calculator, pen, coins, dollars, and note paper." />
-                    <p>Results shown here</p>
-                    <p>Complete the form an click "calculate repayments" to see what your monthly repayments would be.</p>
+                    <p className="text-xl font-bold text-white">Results shown here</p>
+                    <p className="text-gray-400">Complete the form an click "calculate repayments" to see what your monthly repayments would be.</p>
                 </div>
             )}
-        </section>
+        </div>
     );
 }
 
