@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import calcImage from "../assets/icon-calculator.svg";
 import Results from "./Results";
 
 const Calculator: React.FC = () => {
@@ -84,8 +85,8 @@ const Calculator: React.FC = () => {
         <div className="flex justify-evenly items-center h-auto border p-4 m-50 w-200 rounded shadow-md">
             <form>
                 <h1>Mortgage Calculator</h1>
-                <h2>Mortgage Amount</h2>
                 <div>
+                    <label>Mortgage Amount </label>
                     <input
                         type="text"
                         id="mortgage-amount"
@@ -100,6 +101,7 @@ const Calculator: React.FC = () => {
                     {errors.amount && <p className="text-red-500">{errors.amount}</p>}
                 </div>
                 <div>
+                    <label>Mortgage Term </label>
                     <input
                         type="text"
                         id="mortgage-term"
@@ -114,6 +116,7 @@ const Calculator: React.FC = () => {
                     {errors.term && <p className="text-red-500">{errors.term}</p>}
                 </div>
                 <div>
+                    <label>Interest Rate </label>
                     <input
                         type="text"
                         id="mortgage-rate"
@@ -127,7 +130,7 @@ const Calculator: React.FC = () => {
                     />
                     {errors.rate && <p className="text-red-500">{errors.rate}</p>}
                 </div>
-                <h2>Mortgage Type</h2>
+                <label>Mortgage Type</label>
                 <div>
                     <label>
                         <input
@@ -151,12 +154,20 @@ const Calculator: React.FC = () => {
                     </label>
                 </div>
                 <div>
-                    <button onClick={calculatePayment}>
-                        Calculate Repayments
+                    <button className="border rounded-2xl border-transparent bg-lime-500 font-bold p-2
+                     hover:bg-lime-600 hover:shadow-md" onClick={calculatePayment}>
+                        <div className="flex items-center space-x-2">
+                            <div>
+                                <img src={calcImage} alt="Icon of a calculator" />
+                            </div>
+                            <div>
+                                Calculate Payments
+                            </div>
+                        </div>
                     </button>
                 </div>
             </form>
-            <div className="p-4 border rounded shadow-md">
+            <div className="p-4 border border-transparent">
                 <Results payment={paymentResult} />
             </div>
         </div>
