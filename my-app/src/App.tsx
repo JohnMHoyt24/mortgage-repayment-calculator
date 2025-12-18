@@ -3,9 +3,9 @@ import Calculator from "./components/Calculator";
 function App() {
 
   return (
-    <div>
+    <section>
       <Calculator />
-    </div>
+    </section>
   )
 }
 
