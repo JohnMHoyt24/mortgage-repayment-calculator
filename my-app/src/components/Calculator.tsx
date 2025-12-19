@@ -82,15 +82,16 @@ const Calculator: React.FC = () => {
     }
 
     return(
-        <div className="flex justify-evenly items-center h-auto border p-4 m-50 w-200 rounded shadow-md">
-            <form>
+        <div className="flex justify-evenly items-center h-auto bg-gray-100 border border-transparent p- m-50 w-260 rounded-xl shadow-xl">
+            <form className="w-1/2 p-3">
                 <h1>Mortgage Calculator</h1>
-                <div>
-                    <label>Mortgage Amount </label>
+                <div className="flex flex-col">
+                    <label className="text-gray-600 text-sm">Mortgage Amount </label>
                     <input
                         type="text"
                         id="mortgage-amount"
                         placeholder="Enter the amount of the loan..."
+                        className="border-2 border-lime-300 rounded-sm p-0.5"
                         value={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
@@ -100,39 +101,43 @@ const Calculator: React.FC = () => {
                     />
                     {errors.amount && <p className="text-red-500">{errors.amount}</p>}
                 </div>
-                <div>
-                    <label>Mortgage Term </label>
-                    <input
-                        type="text"
-                        id="mortgage-term"
-                        placeholder="Enter the term of the loan..."
-                        value={term}
-                        onChange={(e) => {
-                            setTerm(e.target.value);
-                            clearErrorOnChange('term');
-                        }}
-                        //Apply error styling in Tailwind if there is an error for term
-                    />
-                    {errors.term && <p className="text-red-500">{errors.term}</p>}
+                <div className="flex space-x-4">
+                    <div className="flex flex-col">
+                        <label className="text-gray-600 text-sm">Mortgage Term </label>
+                        <input
+                            type="text"
+                            id="mortgage-term"
+                            placeholder="Enter the term of the loan..."
+                            className="w-50 border-2 border-lime-300 rounded-sm p-0.5"
+                            value={term}
+                            onChange={(e) => {
+                                setTerm(e.target.value);
+                                clearErrorOnChange('term');
+                            }}
+                            //Apply error styling in Tailwind if there is an error for term
+                        />
+                        {errors.term && <p className="text-red-500">{errors.term}</p>}
+                    </div>
+                    <div className="flex flex-col">
+                        <label className="text-gray-600 text-sm">Interest Rate </label>
+                        <input
+                            type="text"
+                            id="mortgage-rate"
+                            placeholder="Enter the interest rate of the loan..."
+                            className="w-70 border rounded-sm p-0.5"
+                            value={rate}
+                            onChange={(e) => {
+                                setRate(e.target.value);
+                                clearErrorOnChange('rate');
+                            }}
+                            //Apply error styling in Tailwind if there is an error for rate
+                        />
+                        {errors.rate && <p className="text-red-500">{errors.rate}</p>}
+                    </div>
                 </div>
-                <div>
-                    <label>Interest Rate </label>
-                    <input
-                        type="text"
-                        id="mortgage-rate"
-                        placeholder="Enter the interest rate of the loan..."
-                        value={rate}
-                        onChange={(e) => {
-                            setRate(e.target.value);
-                            clearErrorOnChange('rate');
-                        }}
-                        //Apply error styling in Tailwind if there is an error for rate
-                    />
-                    {errors.rate && <p className="text-red-500">{errors.rate}</p>}
-                </div>
-                <label>Mortgage Type</label>
-                <div>
-                    <label>
+                <label className="text-gray-600 text-sm">Mortgage Type</label>
+                <div className="flex flex-col space-y-2">
+                    <label className="border rounded-sm w-40 p-1">
                         <input
                             type="radio"
                             name="mortgage-type"
@@ -142,7 +147,7 @@ const Calculator: React.FC = () => {
                         />
                         Repayment
                     </label>
-                    <label>
+                    <label className="border rounded-sm w-40 p-1">
                         <input
                             type="radio"
                             name="mortgage-type"
@@ -153,7 +158,7 @@ const Calculator: React.FC = () => {
                         Interest Only
                     </label>
                 </div>
-                <div>
+                <div className="py-4">
                     <button className="border rounded-2xl border-transparent bg-lime-500 font-bold p-2
                      hover:bg-lime-600 hover:shadow-md" onClick={calculatePayment}>
                         <div className="flex items-center space-x-2">
@@ -167,7 +172,7 @@ const Calculator: React.FC = () => {
                     </button>
                 </div>
             </form>
-            <div className="p-4 border border-transparent">
+            <div className="p-0 w-1/2">
                 <Results payment={paymentResult} />
             </div>
         </div>
