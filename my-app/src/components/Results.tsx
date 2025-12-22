@@ -3,7 +3,7 @@ import emptyImage from '../assets/illustration-empty.svg';
 
 const Results: React.FC<{ payment: string }> = ({ payment }) => {
     return (
-        <div className="border border-transparent bg-blue-950 rounded-es-4xl text-center w-full h-full p-6 min-h-[220px]">
+        <div className="border border-transparent bg-blue-950 rounded-es-4xl text-center w-full h-100 p-6 min-h-[220px]">
             {payment && payment !== null  ? (
                 <h2>Monthly Payment: ${payment}</h2>
             ) : (
