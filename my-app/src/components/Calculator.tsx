@@ -81,17 +81,27 @@ const Calculator: React.FC = () => {
         setMortgageType("");
     }
 
+    const clearAll = () => {
+        setAmount("");
+        setTerm("");
+        setRate("");
+        setMortgageType("");
+    };
+
     return(
         <div className="flex justify-evenly items-center h-auto bg-gray-100 border border-transparent p- m-50 w-260 rounded-xl shadow-xl">
             <form className="w-1/2 p-3">
-                <h1>Mortgage Calculator</h1>
-                <div className="flex flex-col">
+                <div className="h-16 flex justify-between items-center">
+                    <label className="font-semibold text-lg">Mortgage Calculator</label>
+                    <button className="underline text-blue-400" onClick={clearAll}>Clear All</button>
+                </div>
+                <div className="flex flex-col h-16">
                     <label className="text-gray-600 text-sm">Mortgage Amount </label>
                     <input
                         type="text"
                         id="mortgage-amount"
                         placeholder="Enter the amount of the loan..."
-                        className="border-2 border-lime-300 rounded-sm p-0.5"
+                        className="border focus:outline-lime-300 rounded-sm p-0.5"
                         value={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
@@ -101,14 +111,14 @@ const Calculator: React.FC = () => {
                     />
                     {errors.amount && <p className="text-red-500">{errors.amount}</p>}
                 </div>
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 h-16">
                     <div className="flex flex-col">
                         <label className="text-gray-600 text-sm">Mortgage Term </label>
                         <input
                             type="text"
                             id="mortgage-term"
                             placeholder="Enter the term of the loan..."
-                            className="w-50 border-2 border-lime-300 rounded-sm p-0.5"
+                            className="w-50 border focus:outline-lime-300 rounded-sm p-0.5"
                             value={term}
                             onChange={(e) => {
                                 setTerm(e.target.value);
@@ -124,7 +134,7 @@ const Calculator: React.FC = () => {
                             type="text"
                             id="mortgage-rate"
                             placeholder="Enter the interest rate of the loan..."
-                            className="w-70 border rounded-sm p-0.5"
+                            className="w-70 border focus:outline-lime-300 rounded-sm p-0.5"
                             value={rate}
                             onChange={(e) => {
                                 setRate(e.target.value);
@@ -137,7 +147,7 @@ const Calculator: React.FC = () => {
                 </div>
                 <label className="text-gray-600 text-sm">Mortgage Type</label>
                 <div className="flex flex-col space-y-2">
-                    <label className="border rounded-sm w-40 p-1">
+                    <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
                         <input
                             type="radio"
                             name="mortgage-type"
@@ -147,7 +157,7 @@ const Calculator: React.FC = () => {
                         />
                         Repayment
                     </label>
-                    <label className="border rounded-sm w-40 p-1">
+                    <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
                         <input
                             type="radio"
                             name="mortgage-type"
