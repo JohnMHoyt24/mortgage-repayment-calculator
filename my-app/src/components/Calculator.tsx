@@ -151,7 +151,7 @@ const Calculator: React.FC = () => {
 
     return(
         // Main container: flexbox layout with form on left, results on right
-        <div className="flex justify-evenly items-center h-auto bg-gray-100 border border-transparent p- m-50 w-260 rounded-xl shadow-xl">
+        <div className="calculator flex justify-evenly items-center h-auto bg-gray-100 border border-transparent p- m-50 w-260 rounded-xl shadow-xl">
             {/* Form section: contains all input fields and calculation button */}
             <form className="w-1/2 p-3">
                 {/* Header section with title and clear button */}
