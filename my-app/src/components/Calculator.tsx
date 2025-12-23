@@ -157,7 +157,7 @@ const Calculator: React.FC = () => {
                 {/* Header section with title and clear button */}
                 <div className="h-16 flex justify-between items-center">
                     <label className="font-semibold text-lg">Mortgage Calculator</label>
-                    <button className="underline text-blue-400" onClick={clearAll}>Clear All</button>
+                    <button id="clear-button" className="underline text-blue-400" onClick={clearAll}>Clear All</button>
                 </div>
                 
                 {/* Mortgage Amount input field */}
@@ -176,7 +176,7 @@ const Calculator: React.FC = () => {
                         // Apply error styling in Tailwind if there is an error for amount
                     />
                     {/* Display error message if validation fails */}
-                    {errors.amount && <p className="text-red-500">{errors.amount}</p>}
+                    {errors.amount && <p className="error-message text-red-500">{errors.amount}</p>}
                 </div>
                 
                 {/* Mortgage Term and Interest Rate inputs side by side */}
@@ -197,7 +197,7 @@ const Calculator: React.FC = () => {
                             // Apply error styling in Tailwind if there is an error for term
                         />
                         {/* Display error message if validation fails */}
-                        {errors.term && <p className="text-red-500">{errors.term}</p>}
+                        {errors.term && <p className="error-message text-red-500">{errors.term}</p>}
                     </div>
                     
                     {/* Interest Rate input field */}
@@ -216,7 +216,7 @@ const Calculator: React.FC = () => {
                             // Apply error styling in Tailwind if there is an error for rate
                         />
                         {/* Display error message if validation fails */}
-                        {errors.rate && <p className="text-red-500">{errors.rate}</p>}
+                        {errors.rate && <p className="error-message text-red-500">{errors.rate}</p>}
                     </div>
                 </div>
                 
