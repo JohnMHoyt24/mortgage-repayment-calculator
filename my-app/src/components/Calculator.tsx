@@ -139,11 +139,14 @@ const Calculator: React.FC = () => {
      * Clears all form inputs and resets the calculator to initial state
      * Called when user clicks the "Clear All" button
      */
-    const clearAll = () => {
+    const clearAll = (e: React.FormEvent) => {
+        e.preventDefault();
         setAmount("");
         setTerm("");
         setRate("");
         setMortgageType("");
+        setPaymentResult("");
+        setErrors({});
     };
 
     return(
@@ -158,8 +161,8 @@ const Calculator: React.FC = () => {
                 </div>
                 
                 {/* Mortgage Amount input field */}
-                <div className="flex flex-col h-16">
-                    <label className="text-gray-600 text-sm">Mortgage Amount </label>
+                <div className="flex flex-col h-20">
+                    <label className="text-gray-600 text-sm">Mortgage Amount ($)</label>
                     <input
                         type="text"
                         id="mortgage-amount"
@@ -177,10 +180,10 @@ const Calculator: React.FC = () => {
                 </div>
                 
                 {/* Mortgage Term and Interest Rate inputs side by side */}
-                <div className="flex space-x-4 h-16">
+                <div className="flex space-x-4 h-24">
                     {/* Mortgage Term input field */}
                     <div className="flex flex-col">
-                        <label className="text-gray-600 text-sm">Mortgage Term </label>
+                        <label className="text-gray-600 text-sm">Mortgage Term (years)</label>
                         <input
                             type="text"
                             id="mortgage-term"
@@ -199,7 +202,7 @@ const Calculator: React.FC = () => {
                     
                     {/* Interest Rate input field */}
                     <div className="flex flex-col">
-                        <label className="text-gray-600 text-sm">Interest Rate </label>
+                        <label className="text-gray-600 text-sm">Interest Rate (%)</label>
                         <input
                             type="text"
                             id="mortgage-rate"

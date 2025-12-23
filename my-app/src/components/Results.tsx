@@ -17,11 +17,11 @@ import emptyImage from '../assets/illustration-empty.svg';
 const Results: React.FC<{ payment: string }> = ({ payment }) => {
     return (
         // Main results container with dark blue background and rounded corners
-        <div className="border border-transparent bg-blue-950 rounded-es-4xl text-center w-full h-100 p-6 min-h-[220px]">
+        <div className="border border-transparent bg-blue-950 rounded-es-4xl text-center w-full h-110 p-6 min-h-[220px]">
             {/* Conditional rendering: show payment result or empty state */}
             {payment && payment !== null  ? (
                 // Display calculated monthly payment when available
-                <h2>Monthly Payment: ${payment}</h2>
+                <p className="text-2xl font-bold text-white">Monthly Payment: ${payment}</p>
             ) : (
                 // Empty state: shown when no calculation has been performed
                 <div className="flex justify-center items-center flex-col">
