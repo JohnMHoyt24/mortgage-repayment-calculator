@@ -1,4 +1,5 @@
 import Calculator from "./components/Calculator";
+//This component renders the Calculator component.
 
 function App() {
 
