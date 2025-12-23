@@ -161,7 +161,7 @@ const Calculator: React.FC = () => {
                 </div>
                 
                 {/* Mortgage Amount input field */}
-                <div className="flex flex-col h-20">
+                <div id="loan-amount" className="flex flex-col h-20">
                     <label className="text-gray-600 text-sm">Mortgage Amount ($)</label>
                     <input
                         type="text"
@@ -182,7 +182,7 @@ const Calculator: React.FC = () => {
                 {/* Mortgage Term and Interest Rate inputs side by side */}
                 <div className="flex space-x-4 h-24">
                     {/* Mortgage Term input field */}
-                    <div className="flex flex-col">
+                    <div id="loan-term" className="flex flex-col">
                         <label className="text-gray-600 text-sm">Mortgage Term (years)</label>
                         <input
                             type="text"
@@ -201,7 +201,7 @@ const Calculator: React.FC = () => {
                     </div>
                     
                     {/* Interest Rate input field */}
-                    <div className="flex flex-col">
+                    <div id="interest-rate" className="flex flex-col">
                         <label className="text-gray-600 text-sm">Interest Rate (%)</label>
                         <input
                             type="text"
@@ -226,6 +226,7 @@ const Calculator: React.FC = () => {
                     {/* Repayment mortgage option */}
                     <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
                         <input
+                            id="mortgage-repayment"
                             type="radio"
                             name="mortgage-type"
                             value="repayment"
@@ -237,6 +238,7 @@ const Calculator: React.FC = () => {
                     {/* Interest-only mortgage option */}
                     <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
                         <input
+                            id="interest-only"
                             type="radio"
                             name="mortgage-type"
                             value="interest"
@@ -248,7 +250,7 @@ const Calculator: React.FC = () => {
                 </div>
                 
                 {/* Calculate button: triggers payment calculation */}
-                <div className="py-4">
+                <div id="calculate-button" className="py-4">
                     <button className="border rounded-2xl border-transparent bg-lime-500 font-bold p-2
                      hover:bg-lime-600 hover:shadow-md" onClick={calculatePayment}>
                         <div className="flex items-center space-x-2">
