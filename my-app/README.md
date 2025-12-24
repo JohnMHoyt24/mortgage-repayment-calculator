@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# Frontend Mentor - Mortgage Repayment Calculator
+A simple form with text input fields, two radio buttons, a button that clears the form, and a button that calculates monthly mortgage payments.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Initial State
+<img width="1378" height="636" alt="image" src="https://github.com/user-attachments/assets/f5d672e8-cabd-4998-8f02-8336c2d17b45" />
 
-Currently, two official plugins are available:
+## Missing Values State
+<img width="1385" height="611" alt="image" src="https://github.com/user-attachments/assets/bc97253a-70c7-421a-9ea1-9b761176a71d" />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Invalid Number State
+<img width="1323" height="601" alt="image" src="https://github.com/user-attachments/assets/f3825b6b-d434-4e4f-a8da-34b8782dc5d1" />
 
-## React Compiler
+## Monthly Payment State
+<img width="1343" height="626" alt="image" src="https://github.com/user-attachments/assets/e42b49db-799f-4e93-b4a5-8d79308be608" />
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## John Hoyt
+- Website - [John's World](https://johnmhoyt24.github.io/accessible-portfolio/))
+- Frontend Mentor - @JohnHoyt24
 
-## Expanding the ESLint configuration
+## Technologies Used
+- HTML
+- JavaScript
+- TypeScript
+- Tailwind CSS
+- React
+- Flexbox
+- Vite
+- Jest
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## What I Learned
+- The importance of writing unit tests to ensure programs function as intended.
+- The use of props when passing values from the parent component (Calculator) to the child component (Result)
+  ```
+   {/* Results section: displays calculated monthly payment */}
+    <div className="p-0 w-1/2">
+        <Results payment={paymentResult} />
+    </div>
+  ```
