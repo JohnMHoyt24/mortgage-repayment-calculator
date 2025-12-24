@@ -48,9 +48,8 @@ describe('Calculator Component', () => {
         expect(mortgageRepaymentRadio).toBeChecked();
         expect(interestOnlyRadio).not.toBeChecked();
         
-            // Simulate a click event on the calculate button
-            calculateButton.click();
-        });
+        // Simulate a click event on the calculate button
+        calculateButton.click();
     });
 
     it('should display error message for invalid input', () => {
@@ -76,19 +75,20 @@ describe('Calculator Component', () => {
 
         // Simulate a click event on the calculate button
         calculateButton.click();
-    
+    });
+
     it('should clear input fields when clear button is clicked', () => {
         // Render the Calculator component and get access to the DOM container
         const { container } = render(<Calculator />);
         
         /* Query the DOM for the input elements and the button element. The elements are HTMLInputElement or HTMLElement types 
         or null if not found */
-        const loanAmountInput = container.querySelector('#loan-amount') as HTMLInputElement | null;
-        const interestRateInput = container.querySelector('#interest-rate') as HTMLInputElement | null;
-        const loanTermInput = container.querySelector('#loan-term') as HTMLInputElement | null;
+        const loanAmountInput = container.querySelector('#mortgage-amount') as HTMLInputElement | null;
+        const interestRateInput = container.querySelector('#mortgage-rate') as HTMLInputElement | null;
+        const loanTermInput = container.querySelector('#mortgage-term') as HTMLInputElement | null;
         const mortgageRepaymentRadio = container.querySelector('#mortgage-repayment') as HTMLInputElement | null;
         const interestOnlyRadio = container.querySelector('#interest-only') as HTMLInputElement | null;
-        const clearButton = container.querySelector('#clear-button') as HTMLElement | null;
+        const clearButton = container.querySelector('#clear-button') as HTMLButtonElement | null;
 
         // If any of the elements are not found, throw an error
         if (!loanAmountInput || !interestRateInput || !loanTermInput || !clearButton) {
@@ -98,23 +98,19 @@ describe('Calculator Component', () => {
         if(!mortgageRepaymentRadio || !interestOnlyRadio) {
             throw new Error('Radio buttons not found');
         }
-
-        if(!clearButton) {
-            throw new Error('Clear button not found');
-        }
         
-        // Set the values of the input elements
-        loanAmountInput.value = '100000';
-        interestRateInput.value = '5';
-        loanTermInput.value = '30';
-        mortgageRepaymentRadio.
+        // Set the values of the input elements using fireEvent.change to properly update React state
+        fireEvent.change(loanAmountInput, { target: { value: '100000' } });
+        fireEvent.change(interestRateInput, { target: { value: '5' } });
+        fireEvent.change(loanTermInput, { target: { value: '30' } });
+        fireEvent.click(mortgageRepaymentRadio);
 
         // Simulate a click event on the clear button
-        clearButton.click();
+        fireEvent.click(clearButton);
 
         // Assert that the input fields are cleared
         expect(loanAmountInput.value).toBe('');
         expect(interestRateInput.value).toBe('');
         expect(loanTermInput.value).toBe('');
-    }
+    });
 });
