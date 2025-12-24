@@ -21,10 +21,10 @@ const Results: React.FC<{ payment: string }> = ({ payment }) => {
             {/* Conditional rendering: show payment result or empty state */}
             {payment && payment !== null  ? (
                 // Display calculated monthly payment when available
-                <p className="text-2xl font-bold text-white">Monthly Payment: ${payment}</p>
+                <p className="show-result text-2xl font-bold text-white">Monthly Payment: ${payment}</p>
             ) : (
                 // Empty state: shown when no calculation has been performed
-                <div className="flex justify-center items-center flex-col">
+                <div className="no-result flex justify-center items-center flex-col">
                     {/* Illustration image for empty state */}
                     <img src={emptyImage} alt="Illustration of a calculator, pen, coins, dollars, and note paper." />
                     {/* Empty state heading */}
