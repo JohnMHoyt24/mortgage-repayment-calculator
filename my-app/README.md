@@ -29,7 +29,8 @@ A simple form with text input fields, two radio buttons, a button that clears th
 
 ## What I Learned
 - The importance of writing unit tests to ensure programs function as intended.
-- The use of props when passing values from the parent component (Calculator) to the child component (Result)
+- The use of props when passing values from the parent component (Calculator) to the child component (Result).
+  ## Calculator.tsx (lines 268-271)
   ```
    {/* Results section: displays calculated monthly payment */}
     <div className="p-0 w-1/2">
