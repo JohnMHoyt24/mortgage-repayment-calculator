@@ -4,7 +4,7 @@ import Calculator from "./components/Calculator";
 function App() {
 
   return (
-    <section>
+    <section className="min-h-screen w-full p-2 sm:p-4 md:p-6 lg:p-8 bg-blue-300">
       <Calculator />
     </section>
   )

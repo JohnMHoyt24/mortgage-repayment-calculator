@@ -151,23 +151,23 @@ const Calculator: React.FC = () => {
 
     return(
         // Main container: flexbox layout with form on left, results on right
-        <div className="calculator flex justify-evenly items-center h-auto bg-gray-100 border border-transparent p- m-50 w-260 rounded-xl shadow-xl">
+        <div className="calculator flex flex-col lg:flex-row justify-evenly items-center h-auto bg-gray-100 border border-transparent p-4 md:p-6 lg:p-8 m-4 md:m-6 lg:m-8 w-full max-w-7xl mx-auto rounded-xl shadow-xl">
             {/* Form section: contains all input fields and calculation button */}
-            <form className="w-1/2 p-3">
+            <form className="w-full lg:w-1/2 p-3 md:p-4 lg:p-6">
                 {/* Header section with title and clear button */}
-                <div className="h-16 flex justify-between items-center">
-                    <label className="font-semibold text-lg">Mortgage Calculator</label>
-                    <button id="clear-button" className="underline text-blue-400" onClick={clearAll}>Clear All</button>
+                <div className="h-16 flex justify-between items-center mb-2 md:mb-4">
+                    <h2 className="font-semibold text-base md:text-lg lg:text-xl">Mortgage Calculator</h2>
+                    <button id="clear-button" className="underline text-blue-400 text-sm md:text-base hover:text-blue-600" onClick={clearAll}>Clear All</button>
                 </div>
                 
                 {/* Mortgage Amount input field */}
-                <div id="loan-amount" className="flex flex-col h-20">
-                    <label className="text-gray-600 text-sm">Mortgage Amount ($)</label>
+                <div id="loan-amount" className="flex flex-col h-20 mb-2 md:mb-4">
+                    <label htmlFor="mortgage-amount" className="text-gray-600 text-sm md:text-base mb-1">Mortgage Amount ($)</label>
                     <input
                         type="text"
                         id="mortgage-amount"
                         placeholder="Enter the amount of the loan..."
-                        className="border focus:outline-lime-300 rounded-sm p-0.5"
+                        className="border focus:outline-lime-300 rounded-sm p-2 md:p-2.5 text-sm md:text-base w-full"
                         value={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
@@ -176,19 +176,19 @@ const Calculator: React.FC = () => {
                         // Apply error styling in Tailwind if there is an error for amount
                     />
                     {/* Display error message if validation fails */}
-                    {errors.amount && <p className="error-message text-red-500">{errors.amount}</p>}
+                    {errors.amount && <p className="error-message text-red-500 text-xs md:text-sm mt-1">{errors.amount}</p>}
                 </div>
                 
                 {/* Mortgage Term and Interest Rate inputs side by side */}
-                <div className="flex space-x-4 h-24">
+                <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0 h-auto mb-2 md:mb-4">
                     {/* Mortgage Term input field */}
-                    <div id="loan-term" className="flex flex-col">
-                        <label className="text-gray-600 text-sm">Mortgage Term (years)</label>
+                    <div id="loan-term" className="flex flex-col flex-1">
+                        <label className="text-gray-600 text-sm md:text-base mb-1">Mortgage Term (years)</label>
                         <input
                             type="text"
                             id="mortgage-term"
                             placeholder="Enter the term of the loan..."
-                            className="w-50 border focus:outline-lime-300 rounded-sm p-0.5"
+                            className="w-full border focus:outline-lime-300 rounded-sm p-2 md:p-2.5 text-sm md:text-base"
                             value={term}
                             onChange={(e) => {
                                 setTerm(e.target.value);
@@ -197,17 +197,17 @@ const Calculator: React.FC = () => {
                             // Apply error styling in Tailwind if there is an error for term
                         />
                         {/* Display error message if validation fails */}
-                        {errors.term && <p className="error-message text-red-500">{errors.term}</p>}
+                        {errors.term && <p className="error-message text-red-500 text-xs md:text-sm mt-1">{errors.term}</p>}
                     </div>
                     
                     {/* Interest Rate input field */}
-                    <div id="interest-rate" className="flex flex-col">
-                        <label className="text-gray-600 text-sm">Interest Rate (%)</label>
+                    <div id="interest-rate" className="flex flex-col flex-1">
+                        <label className="text-gray-600 text-sm md:text-base mb-1">Interest Rate (%)</label>
                         <input
                             type="text"
                             id="mortgage-rate"
                             placeholder="Enter the interest rate of the loan..."
-                            className="w-70 border focus:outline-lime-300 rounded-sm p-0.5"
+                            className="w-full border focus:outline-lime-300 rounded-sm p-2 md:p-2.5 text-sm md:text-base"
                             value={rate}
                             onChange={(e) => {
                                 setRate(e.target.value);
@@ -216,48 +216,52 @@ const Calculator: React.FC = () => {
                             // Apply error styling in Tailwind if there is an error for rate
                         />
                         {/* Display error message if validation fails */}
-                        {errors.rate && <p className="error-message text-red-500">{errors.rate}</p>}
+                        {errors.rate && <p className="error-message text-red-500 text-xs md:text-sm mt-1">{errors.rate}</p>}
                     </div>
                 </div>
                 
                 {/* Mortgage Type selection: radio buttons for repayment vs interest-only */}
-                <label className="text-gray-600 text-sm">Mortgage Type</label>
-                <div className="flex flex-col space-y-2">
-                    {/* Repayment mortgage option */}
-                    <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
-                        <input
-                            id="mortgage-repayment"
-                            type="radio"
-                            name="mortgage-type"
-                            value="repayment"
-                            checked={mortgageType === 'repayment'}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMortgageType(e.target.value as 'repayment' | 'interest')}
-                        />
-                        Repayment
-                    </label>
-                    {/* Interest-only mortgage option */}
-                    <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-40 p-1">
-                        <input
-                            id="interest-only"
-                            type="radio"
-                            name="mortgage-type"
-                            value="interest"
-                            checked={mortgageType === 'interest'}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMortgageType(e.target.value as 'repayment' | 'interest')}
-                        />
-                        Interest Only
-                    </label>
+                <div className="mb-2 md:mb-4">
+                    <label className="text-gray-600 text-sm md:text-base block mb-2">Mortgage Type</label>
+                    <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0">
+                        {/* Repayment mortgage option */}
+                        <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-full sm:w-auto min-w-[140px] p-2 md:p-2.5 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input
+                                id="mortgage-repayment"
+                                type="radio"
+                                name="mortgage-type"
+                                value="repayment"
+                                checked={mortgageType === 'repayment'}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMortgageType(e.target.value as 'repayment' | 'interest')}
+                                className="mr-2"
+                            />
+                            <span className="text-sm md:text-base">Repayment</span>
+                        </label>
+                        {/* Interest-only mortgage option */}
+                        <label className="border has-checked:bg-lime-100 has-checked:border-lime-400 rounded-sm w-full sm:w-auto min-w-[140px] p-2 md:p-2.5 cursor-pointer hover:bg-gray-50 transition-colors">
+                            <input
+                                id="interest-only"
+                                type="radio"
+                                name="mortgage-type"
+                                value="interest"
+                                checked={mortgageType === 'interest'}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMortgageType(e.target.value as 'repayment' | 'interest')}
+                                className="mr-2"
+                            />
+                            <span className="text-sm md:text-base">Interest Only</span>
+                        </label>
+                    </div>
                 </div>
                 
                 {/* Calculate button: triggers payment calculation */}
-                <div id="calculate-button" className="py-4">
-                    <button className="border rounded-2xl border-transparent bg-lime-500 font-bold p-2
-                     hover:bg-lime-600 hover:shadow-md" onClick={calculatePayment}>
-                        <div className="flex items-center space-x-2">
+                <div id="calculate-button" className="py-2 md:py-4">
+                    <button className="border rounded-2xl border-transparent bg-lime-500 font-bold p-2 md:p-3 w-full sm:w-auto
+                     hover:bg-lime-600 hover:shadow-md transition-all duration-200 active:scale-95" onClick={calculatePayment}>
+                        <div className="flex items-center justify-center space-x-2">
                             <div>
-                                <img src={calcImage} alt="Icon of a calculator" />
+                                <img src={calcImage} alt="Icon of a calculator" className="w-4 h-4 md:w-5 md:h-5" />
                             </div>
-                            <div>
+                            <div className="text-sm md:text-base">
                                 Calculate Payments
                             </div>
                         </div>
@@ -266,7 +270,7 @@ const Calculator: React.FC = () => {
             </form>
             
             {/* Results section: displays calculated monthly payment */}
-            <div className="p-0 w-1/2">
+            <div className="p-0 w-full lg:w-1/2 mt-4 lg:mt-0">
                 <Results payment={paymentResult} />
             </div>
         </div>
